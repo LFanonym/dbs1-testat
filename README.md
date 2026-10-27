@@ -6,11 +6,14 @@ Authors: Laurin Fürer, Eric Merz
 
 ## Use
 
-To create a postgres db with docker compose first create a .env
+To create a postgres db with docker compose first create a `.env`
 
 ```.env
-POSTGRES_PASSWORD=change_this_to_a_strong_password
+POSTGRES_PASSWORD='change_this_to_a_strong_password'
 ```
+
+**IMPORTANT!** You need to single quote the password in the `.env` file
+
 Then run the following command:
 
 ```sh
