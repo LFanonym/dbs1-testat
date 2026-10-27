@@ -10,7 +10,6 @@ SET client_min_messages = ERROR;
 \set promptvar ''
 
 \prompt 'DROP ROLE [':user'] and DROP DATABASE [':database'] if existing (\\q or Ctrl-C to abort)?' promptvar
-:promptvar
 
 DROP DATABASE if exists :database (FORCE);
 DROP ROLE if exists :user;
@@ -21,7 +20,6 @@ DROP ROLE if exists :user;
 \echo
 
 \prompt 'CREATE ROLE [':user'] and DATABASE [':database'] (\\q or Ctrl-C to abort)?' promptvar
-:promptvar
 
 CREATE ROLE :user WITH LOGIN PASSWORD :password;
 CREATE DATABASE :database WITH OWNER=:user ENCODING='UTF8';
@@ -51,7 +49,6 @@ CREATE DATABASE :database WITH OWNER=:user ENCODING='UTF8';
 
 \echo
 \prompt 'Execute Queries (\\q or Ctrl-C to abort)?' promptvar
-:promptvar
 
 -- set client encoding for query results to auto
 -- > adjust if the detected default is not what you want

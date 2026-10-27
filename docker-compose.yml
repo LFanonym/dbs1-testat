@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
 
     environment:
-      POSTGRES_DB: appdb
-      POSTGRES_USER: appuser
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
 
     ports:
