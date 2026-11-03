@@ -5,24 +5,12 @@
 CREATE TABLE person (
     pers_id INTEGER  PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
+    mitarbeiternummer INTEGER UNIQUE,
+    pensum            DECIMAL(3,2) CHECK (pensum BETWEEN 0.2 AND 1),
     vorname VARCHAR(50) NOT NULL,
     adresse VARCHAR(100) NOT NULL,
     postleitzahl INTEGER NOT NULL,
     ort VARCHAR(40) NOT NULL
-);
-
-CREATE TABLE kunde (
-    kunde_id INTEGER  PRIMARY KEY,
-    CONSTRAINT fk_kunde_person
-       FOREIGN KEY (kunde_id) REFERENCES person (pers_id)
-);
-
-CREATE TABLE mitarbeiter (
-    mitarbeiter_id INTEGER  PRIMARY KEY,
-    mitarbeiternummer INTEGER NOT NULL UNIQUE,
-    pensum            DECIMAL(3,2) NOT NULL CHECK (pensum BETWEEN 0.2 AND 1),
-    CONSTRAINT fk_mitarbeiter_person
-        FOREIGN KEY (mitarbeiter_id) REFERENCES person (pers_id)
 );
 
 CREATE TABLE produkt (
@@ -38,9 +26,9 @@ CREATE TABLE bestellung (
     kunde_id INTEGER  NOT NULL ,
     mitarbeiter_id INTEGER  NOT NULL,
     CONSTRAINT fk_bestellung_kunde
-        FOREIGN KEY (kunde_id) REFERENCES kunde (kunde_id),
+        FOREIGN KEY (kunde_id) REFERENCES person (pers_id),
     CONSTRAINT fk_bestellung_mitarbeiter
-        FOREIGN KEY (mitarbeiter_id) REFERENCES mitarbeiter (mitarbeiter_id)
+        FOREIGN KEY (mitarbeiter_id) REFERENCES person (pers_id)
 );
 
 CREATE Table bestellposition (
@@ -86,7 +74,7 @@ CREATE TABLE review(
     CONSTRAINT fk_produkt
         FOREIGN KEY (produkt_id) REFERENCES produkt (produkt_id),
     CONSTRAINT fk_kunde
-        FOREIGN KEY (kunde_id) REFERENCES kunde (kunde_id),
+        FOREIGN KEY (kunde_id) REFERENCES person (pers_id),
     CONSTRAINT fk_mitarbeiter
-        FOREIGN KEY (mitarbeiter_id) REFERENCES mitarbeiter (mitarbeiter_id)
+        FOREIGN KEY (mitarbeiter_id) REFERENCES person (pers_id)
 );
