@@ -37,7 +37,6 @@ CREATE Table bestellposition (
     produkt_id INTEGER NOT NULL ,
     menge INTEGER NOT NULL CHECK ( menge > 0),
     preis DECIMAL(10,2) NOT NULL  CHECK ( preis >=0 ),
-    bestellzeitpunkt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_bestellposition_bestellung
         FOREIGN KEY (bestellung_id) REFERENCES bestellung (bestellung_id),
     CONSTRAINT fk_bestellposition_produkt

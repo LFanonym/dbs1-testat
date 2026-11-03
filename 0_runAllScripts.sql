@@ -41,8 +41,8 @@ CREATE DATABASE :database WITH OWNER=:user ENCODING='UTF8';
 \ir 2_schema.sql
 
 -- insert data in slo-mo or use COPY for speedup
---\ir 3_inserts.sql
-\ir 3_copy.sql
+\ir 3_inserts.sql
+-- \ir 3_copy.sql
 
 -- create primary keys, constraints, indexes
 \ir 4_constraints.sql
@@ -55,10 +55,10 @@ CREATE DATABASE :database WITH OWNER=:user ENCODING='UTF8';
 -- valid values are: 'UTF8', 'LATIN1', 'WIN1252'
 \encoding 'auto'
 
-\set ECHO queries
+-- \set ECHO queries
 -- query the database
-\ir 5_queries.sql
+-- \ir 5_queries.sql
 
-\unset ECHO
+-- \unset ECHO
 -- demonstrate constraints in action
-\ir 6_constraints_tests.sql
+\-- ir 6_constraints_tests.sql
