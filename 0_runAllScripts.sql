@@ -5,7 +5,11 @@
 
 SET client_min_messages = ERROR;
 \set user appuser
-\set password :env_password
+\if :{?env_password}
+    \set password :env_password
+\else
+    \set password 'changeme'
+\endif
 \set database appdb
 \set promptvar ''
 
@@ -21,7 +25,7 @@ DROP ROLE if exists :user;
 
 \prompt 'CREATE ROLE [':user'] and DATABASE [':database'] (\\q or Ctrl-C to abort)?' promptvar
 
-CREATE ROLE :user WITH LOGIN PASSWORD :password;
+CREATE ROLE :user WITH LOGIN PASSWORD :'password';
 CREATE DATABASE :database WITH OWNER=:user ENCODING='UTF8';
 
 -- specify encoding to match your files encoding, usually UTF8
