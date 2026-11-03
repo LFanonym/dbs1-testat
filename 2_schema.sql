@@ -65,15 +65,12 @@ CREATE TABLE zahlung (
 CREATE TABLE review(
     review_id INTEGER PRIMARY KEY,
     produkt_id INTEGER NOT NULL,
-    kunde_id INTEGER,
-    mitarbeiter_id INTEGER,
+    person_id INTEGER,
     titel VARCHAR(200) NOT NULL ,
     text VARCHAR(400) NOT NULL ,
     erstelldatum DATE DEFAULT CURRENT_DATE,
     CONSTRAINT fk_produkt
         FOREIGN KEY (produkt_id) REFERENCES produkt (produkt_id),
     CONSTRAINT fk_kunde
-        FOREIGN KEY (kunde_id) REFERENCES person (pers_id),
-    CONSTRAINT fk_mitarbeiter
-        FOREIGN KEY (mitarbeiter_id) REFERENCES person (pers_id)
+        FOREIGN KEY (person_id) REFERENCES person (pers_id)
 );
