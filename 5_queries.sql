@@ -22,6 +22,29 @@ FROM bestellung b
 WHERE b.bestelldatum >= NOW() - INTERVAL '40 days'
 ;
 
+---------------
+-- AUFGABE 2 --
+---------------
+-- c) Show count of persons living (per PLZ/Ort)
+SELECT p.postleitzahl, p.ort, count(p.postleitzahl) as personenzahl
+FROM person p
+GROUP BY p.postleitzahl, p.ort
+ORDER BY personenzahl DESC, p.postleitzahl
+;
+
+-- d) Anteile der Zahlungsarten (nur bezahlte gewertet)
+SELECT
+    za.bezeichnung as bezeichnung,
+    SUM(z.betrag) as umsatz,
+    round(100 * SUM(z.betrag) / SUM(SUM(z.betrag)) OVER (), 2) AS "anteil [%]"
+FROM zahlungsart za
+JOIN zahlung z
+    on za.zahlungsart_id = z.zahlungsart_id
+    and z.status = 'bezahlt'
+GROUP BY za.zahlungsart_id, za.bezeichnung
+ORDER BY 3 DESC
+;
+
 -- List top ten priced bestellungen
 SELECT b.bestellung_id, SUM(bp.menge * bp.preis) as preis
 FROM bestellung b
