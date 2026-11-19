@@ -83,14 +83,14 @@ SELECT DISTINCT ort
 FROM ersteView ve
 WHERE ve.mitarbeiternummer IS NOT NULL;
 
--- c)
+-- c) create a view that shows all anonym reviews (no person_id)
 DROP VIEW IF EXISTS anonym_reviews;
 CREATE VIEW anonym_reviews (id, produkt_id, titel, text, datum) AS
     SELECT r.review_id, r.produkt_id, r.titel, r.text, r.erstelldatum
     FROM review r
     WHERE r.person_id IS NULL;
 
--- d)
+-- d) Change all anonym reviews with title 'Webcam' to title 'Webcam (Full-HD)'
 UPDATE anonym_reviews
 SET titel = 'Webcam (Full-HD)'
 WHERE titel LIKE 'Webcam'
