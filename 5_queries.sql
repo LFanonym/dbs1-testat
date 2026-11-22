@@ -44,10 +44,11 @@ WHERE b.bestelldatum >= NOW() - INTERVAL '40 days'
 ---------------
 -- AUFGABE 2 --
 ---------------
--- a)
+-- a) First, write a query with an uncorrelated subquery in the FROM clause and document it as a simple comment before the SQL statement.
 SELECT *
 FROM (SELECT MAX (pensum)FROM person) AS sub;
 
+-- b) Then rewrite this query as an equivalent query using a common table expression
 WITH task23table AS (SELECT MAX (pensum)FROM person)
 SELECT * FROM task23table;
 
@@ -74,11 +75,11 @@ ORDER BY 3 DESC
 ---------------
 -- AUFGABE 3 --
 ---------------
--- a)
+-- a)create a view, which contains at least 3 tabulars
 DROP VIEW IF EXISTS ersteView;
 CREATE VIEW ersteView (Mitarbeiternummer,Name,Ort)AS
     SELECT pe.mitarbeiternummer,pe.name,pe.ort from person pe;
--- b)
+-- b)write a normal query which uses the view
 SELECT DISTINCT ort
 FROM ersteView ve
 WHERE ve.mitarbeiternummer IS NOT NULL;
